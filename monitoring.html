@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+<H1>Ram Usage per Minute</H1>
+
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+<script>
+var xyValues = [
+  {x:1, y:2306},
+  {x:2, y:2389},
+  {x:3, y:2376},
+  {x:4, y:2366},
+  {x:5, y:2374},
+  {x:6, y:2373},
+  {x:7, y:2373},
+];
+
+new Chart("myChart", {
+  type: "scatter",
+  data: {
+    datasets: [{
+      pointRadius: 4,
+      pointBackgroundColor: "rgb(0,0,255)",
+      data: xyValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      xAxes: [{ticks: {min: 0, max:10}}],
+      yAxes: [{ticks: {min: 0, max:4000}}],
+    }
+  }
+});
+</script>
+
+</body>
+</html>

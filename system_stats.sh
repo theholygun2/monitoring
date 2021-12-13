@@ -14,7 +14,8 @@ mem_used=`free -m | grep "Mem" | awk '{print $3}'`
 waktu=`date +'%F %T'`
 cpuUsage=`echo "$cpuUsage" | tr ',' '.'`
 
-mysql --user="$user" --password="$password" --database="$database" --execute="INSERT INTO status VALUES(default,'$waktu',$cpuUsage,$mem_used);"
+#mysql --user="$user" --password="$password" --database="$database" --execute="INSERT INTO status VALUES(default,'$waktu',$cpuUsage,$mem_used);"
+mysql monitoring -se "INSERT INTO status VALUES(default,'$waktu',$cpuUsage,$mem_used);"
 
 #---disk
 # disk_usage () {

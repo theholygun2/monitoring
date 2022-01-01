@@ -18,8 +18,4 @@ download=$(speedtest | awk 'BEGIN{ FS=" +|\\(" }; /Download/{ dow=$2 }; END{ pri
 # Menggunakan Mysql untuk memasukan variable waktu, cpuUsage, mem_used, upload, download ke dalam tabel Monitoring
 mysql monitoring -se "INSERT INTO status VALUES(default,'$waktu',$cpuUsage,$mem_used,$upload,$download);"
 
-upload=$(speedtest | awk 'BEGIN{ FS=" +|\\(" }; /Upload/{ upl=$2 }; END{ print upl }')
-download=$(speedtest | awk 'BEGIN{ FS=" +|\\(" }; /Download/{ dow=$2 }; END{ print dow }')
-
-
 #mysql --user="$user" --password="$password" --database="$database" --execute="INSERT INTO status VALUES(default,'$waktu',$cpuUsage,$mem_used);"

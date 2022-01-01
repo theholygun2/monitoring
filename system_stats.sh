@@ -5,8 +5,6 @@ cpuUsage=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {pri
 #-- menukar koma dengan titik supaya dapat dilihat decimal
 cpuUsage=`echo "$cpuUsage" | tr ',' '.'`
 
-#cpuUsage=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}')
-
 #---Mengambil Data Memory Ram usage
 mem_used=`free -m | grep "Mem" | awk '{print $3}'`
 
@@ -20,18 +18,8 @@ download=$(speedtest | awk 'BEGIN{ FS=" +|\\(" }; /Download/{ dow=$2 }; END{ pri
 # Menggunakan Mysql untuk memasukan variable waktu, cpuUsage, mem_used, upload, download ke dalam tabel Monitoring
 mysql monitoring -se "INSERT INTO status VALUES(default,'$waktu',$cpuUsage,$mem_used,$upload,$download);"
 
+upload=$(speedtest | awk 'BEGIN{ FS=" +|\\(" }; /Upload/{ upl=$2 }; END{ print upl }')
+download=$(speedtest | awk 'BEGIN{ FS=" +|\\(" }; /Download/{ dow=$2 }; END{ print dow }')
+
+
 #mysql --user="$user" --password="$password" --database="$database" --execute="INSERT INTO status VALUES(default,'$waktu',$cpuUsage,$mem_used);"
-
-
-
-
-
-
-
-
-
-#---disk
-# disk_usage () {
-# disk_use=`df -P | grep /dev | grep -v -E '(tmp|boot)' | awk '{print $5}' | cut -f 1 -d "%"`
-#  echo "disk usage : $disk_use"
-# }
